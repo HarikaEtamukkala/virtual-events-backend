@@ -16,6 +16,8 @@ export const EventController = {
     },
     async getEventById(req, res) {
         const { id } = req.params;
+        console.log(`Fetching event with ID: ${id}`);
+        console.log('EventModel:', EventModel);
         const event = await EventModel.getEventById(id);
         if (!event) {
             return res.status(404).json({ message: "Event not found" });
@@ -25,9 +27,7 @@ export const EventController = {
     async updateEvent(req, res) {
         const { id } = req.params;
         const { title, description, date, time, location } = req.body;
-        if (!title || !description || !date || !time || !location) {
-            return res.status(400).json({ message: "All fields are required" });
-        }
+        
         const updatedEvent = await EventModel.updateEvent(id, { title, description, date, time, location });
         if (!updatedEvent) {
             return res.status(404).json({ message: "Event not found" });
