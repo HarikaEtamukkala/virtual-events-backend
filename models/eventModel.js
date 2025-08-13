@@ -10,6 +10,7 @@ export const EventModel = {
         return events;
     },
     getEventById: (id) => {
+        console.log('events:', events);
         return events.find(event => event.id === id);
     },
     updateEvent: (id, updatedData) => { 

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/userModel.js";
+import { userModel } from '../models/userModel.js';
 
 const JWT_SECRET = process.env.JWT_SECRET ;
 const authenticate = (req,res,next)=>{
@@ -10,7 +10,7 @@ const authenticate = (req,res,next)=>{
     }
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-        const user = User.getUserById(decoded.id);
+        const user = userModel.getUserById(decoded.id);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
